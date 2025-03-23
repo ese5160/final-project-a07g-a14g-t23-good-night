@@ -62,7 +62,9 @@ Primary users of this project include:
 * SRS 10 - The speaker shall communicate with AI module via PWM/DAC signals.
 
 ### 1.3 Software Architecture Diagram
-![Block Diagram](A07G_Images/A07G_Project_Architecture.png)
+<div align="center">
+  <img src="A07G_Images/A07G_Project_Architecture.png" alt="Software Architecture Diagram" width="600">
+</div>()
 
 ### 1.4 Flowchart/State Machine Diagram
 
