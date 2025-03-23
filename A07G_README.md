@@ -55,7 +55,7 @@ Primary users of this project include:
 * SRS 03 - The OLED shall show time counting down changing animation.
 * SRS 04 - The project shall control LED strip to display several modes: blinking with one color in 0.5 milisecond period, holding in one color, holding in multiple colors.
 * SRS 05 - The Electronic Pet shall move forward, move backward, turn left and turn right based on users' voice command or mobile application control.
-* SRS 06 - The Electronic Pet shall remind users to take breaks and play a light show when 30 minutes counting down ends.
+* SRS 06 - The Electronic Pet shall remind users to take breaks (OLED displaying animation for 10 seconds) and play a light show when 30 minutes counting down ends.
 * SRS 07 - The Electronic Pet shall recognize and answer users' voice commands in 3 seconds after recieving voice activation commands.
 * SRS 08 - The OLED display shall communicate with MCU via SPI bus(≥10MHz) and display refresh rate ≥30fps.
 * SRS 09 - The microphone shall send signals to AI module via I2S bus(Audio sampling rate ≥44.1kHz).
@@ -64,9 +64,12 @@ Primary users of this project include:
 ### 1.3 Software Architecture Diagram
 <div align="center">
   <img src="A07G_Images/A07G_Project_Architecture.png" alt="Software Architecture Diagram" width="600">
-</div>()
+</div>
 
 ### 1.4 Flowchart/State Machine Diagram
+<div align="center">
+  <img src="A07G_Images/A07G_State_Machine.png" alt="Software Architecture Diagram" width="600">
+</div>
 
 ## 2. Understanding the Starter Code
 
