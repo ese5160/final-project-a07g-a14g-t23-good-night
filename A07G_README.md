@@ -50,19 +50,22 @@ Primary users of this project include:
 * Organic Light Emitting Diode: OLED
 
 #### 1.4.4 Functionality
-* SRS 01 - The OLED shall show real time clock with time changing animation.
+* SRS 01 - The OLED shall show real time clock with time changing animation under idle mode.
 * SRS 02 - The Electronic Pet shall count down time, set by users' voice command(all voice ommand response time ≤100ms and all voice recognition accuracy ≥95%).
 * SRS 03 - The OLED shall show time counting down changing animation.
 * SRS 04 - The project shall control LED strip to display several modes: blinking with one color in 0.5 milisecond period, holding in one color, holding in multiple colors.
 * SRS 05 - The Electronic Pet shall move forward, move backward, turn left and turn right based on users' voice command or mobile application control.
 * SRS 06 - The Electronic Pet shall remind users to take breaks and play a light show when 30 minutes counting down ends.
-* SRS 08 - The OLED shall become black when there is no command received after 5 minutes.
-* SRS 09 - The Electronic Pet shall recognize and answer users' voice commands in 3 seconds after recieving voice activation commands.
-* SRS 10 - The OLED display shall communicate with MCU via SPI bus(≥10MHz) and display refresh rate ≥30fps.
-* SRS 11 - The microphone shall send signals to AI module via I2S bus(Audio sampling rate ≥44.1kHz).
-* The speaker shall communicate with AI module via PWM/DAC signals.
+* SRS 07 - The Electronic Pet shall recognize and answer users' voice commands in 3 seconds after recieving voice activation commands.
+* SRS 08 - The OLED display shall communicate with MCU via SPI bus(≥10MHz) and display refresh rate ≥30fps.
+* SRS 09 - The microphone shall send signals to AI module via I2S bus(Audio sampling rate ≥44.1kHz).
+* SRS 10 - The speaker shall communicate with AI module via PWM/DAC signals.
 
+### 1.3 Software Architecture Diagram
 ![Block Diagram](A07G_Images/A07G_Project_Architecture.png)
+
+### 1.4 Flowchart/State Machine Diagram
+
 ## 2. Understanding the Starter Code
 
 ## 3. Debug Logger Module
