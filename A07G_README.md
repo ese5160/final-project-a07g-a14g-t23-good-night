@@ -201,7 +201,7 @@ Only one thread is started: the Command Line Interface (CLI) task named "CLI_TAS
 >> 1. PB10 is connected to one signal channel of the logic analyzer and GND pin in the board is connected to GND channel of the corresponding channel number of the logic analyzer.
 >> 2. Enable Digital channel 0 in the Logic software.
 >> 3. Choosing trigger pattern as rising edge.
->> 4. Choosing Async Serial in the Analyzers module of the Logic software.
+>> 4. Choosing Async Serial in the Analyzers module of the Logic software and setting baud rate as 115200.
 >> 5. Choosing Data type as terminal.
 
 <div align="center">
