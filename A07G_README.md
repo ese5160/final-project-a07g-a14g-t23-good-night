@@ -188,9 +188,31 @@ The `StartTasks()` function:
 
 Only one thread is started: the Command Line Interface (CLI) task named "CLI_TASK".
 ## 3. Debug Logger Module
+[Click here to see SerialConsole.c file.](https://github.com/ese5160/final-project-a07g-a14g-t23-good-night/blob/main/CLI%20Starter%20Code/src/SerialConsole/SerialConsole.c)
 
 ## 4. Wiretap the convo
+> What nets must you attach the logic analyzer to? 
+>> Sercom 4 nets
 
+> Where on the circuit board can you attach / solder to?
+>> PB10, PB11
+
+> What are critical settings for the logic analyzer?
+>> 1. PB10 is connected to one signal channel of the logic analyzer and GND pin in the board is connected to GND channel of the corresponding channel number of the logic analyzer.
+>> 2. Enable Digital channel 0 in the Logic software.
+>> 3. Choosing trigger pattern as rising edge.
+>> 4. Choosing Async Serial in the Analyzers module of the Logic software.
+>> 5. Choosing Data type as terminal.
+
+<div align="center">
+  <img src="A07G_Images/A07G_Part4_Hardware_Connection.jpg" alt="Hardware connections between the SAMW25 Xplained dev board and the logic analyzer" width="600">
+</div>
+
+<div align="center">
+  <img src="A07G_Images/A07G_Part4_Decoded_Info.png" alt="Screenshot of the decoded message" width="600">
+</div>
+
+[Click here for the captured file of a wiretapped conversation](A07G_Part4_Analyzer_Capture.sal)
 ## 5. Complete the CLI
 
 ## 6. Add CLI commands
