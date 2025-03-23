@@ -68,11 +68,125 @@ Primary users of this project include:
 
 ### 1.4 Flowchart/State Machine Diagram
 <div align="center">
-  <img src="A07G_Images/A07G_State_Machine.png" alt="Software Architecture Diagram" width="600">
+  <img src="A07G_Images/A07G_State_Machine.png" alt="State Machine" width="600">
 </div>
 
 ## 2. Understanding the Starter Code
+### 1. InitializeSerialConsole() Function
+`InitializeSerialConsole()` initializes the UART communication system with the following steps:
+- Initializes two circular buffers for receiving and transmitting characters
+- Configures the USART hardware
+- Sets up callbacks for USART read/write operations
+- Sets the interrupt priority
+- Starts an initial read buffer job to begin receiving characters
 
+`cbufRx` and `cbufTx` are handles to circular buffer data structures. These are FIFO (First-In-First-Out) buffers that allow efficient character transfer with automatic wraparound when the buffer reaches its limit.
+
+### 2. Circular Buffer Initialization
+The circular buffers are initialized using the `circular_buf_init` function:
+```c
+cbufRx = circular_buf_init((uint8_t *)rxCharacterBuffer, RX_BUFFER_SIZE);
+cbufTx = circular_buf_init((uint8_t *)txCharacterBuffer, TX_BUFFER_SIZE);
+```
+
+The circular buffer library is defined in `circular_buffer.c` by Phillips Johnston, which implements a circular buffer data structure with functions for adding and removing elements.
+
+### 3. Character Array Storage
+The character arrays for the circular buffers are:
+- `rxCharacterBuffer` - Size: 512 bytes (defined by RX_BUFFER_SIZE)
+- `txCharacterBuffer` - Size: 512 bytes (defined by TX_BUFFER_SIZE)
+
+These arrays are declared as global variables in SerialConsole.c:
+```c
+char rxCharacterBuffer[RX_BUFFER_SIZE];
+char txCharacterBuffer[TX_BUFFER_SIZE];
+```
+
+### 4. UART Interrupt Definition
+The UART interrupts are defined in the ASF (Atmel Software Framework) within the `_usart_interrupt_handler` function in `usart_interrupt.h/c`. This function handles all SERCOM USART interrupt events.
+
+The interrupt mechanism works as follows:
+- Hardware generates interrupts
+- ASF routes these to `_usart_interrupt_handler`
+- Handler checks which interrupt flag is set (RXC, DRE, or TXC)
+- Based on the flag, it calls the appropriate registered callback function
+
+The application connects to these interrupts by registering callbacks in `configure_usart_callbacks()`.
+
+### 5. Callback Functions
+The callback functions for UART operations are:
+
+a. For receiving a character (RX):
+   - `usart_read_callback` is called when a character is received
+
+b. For sending a character (TX):
+   - `usart_write_callback` is called when a character has been sent
+
+### 6. Callback Function Operations
+a. `usart_read_callback`:
+   This function is marked incomplete ("ToDo") in the code. It should:
+   - Get the received character from `latestRx`
+   - Add it to the RX circular buffer (`cbufRx`) using `circular_buf_put()`
+   - Start a new read operation to receive the next character
+
+b. `usart_write_callback`:
+   When a character has been transmitted, this function:
+   - Checks if there are more characters in the TX circular buffer (`cbufTx`) 
+   - If so, retrieves the next character and stores it in `latestTx`
+   - Starts a new transmission
+   - Continues until the circular buffer is empty
+
+### 7. UART Receive Flow Diagram
+```
+User types a character
+     ↓
+Hardware UART receives character
+     ↓
+USART RXC interrupt is triggered
+     ↓
+_usart_interrupt_handler processes the interrupt
+     ↓
+Character is read from USART DATA register
+     ↓
+usart_read_callback() is called
+     ↓
+Character should be stored in cbufRx using circular_buf_put()
+     ↓
+New read operation is started with usart_read_buffer_job()
+     ↓
+Application retrieves character from cbufRx using SerialConsoleReadCharacter()
+```
+
+## 8. UART Transmission Flow Diagram
+```
+Application calls SerialConsoleWriteString("string")
+     ↓
+Characters are added to cbufTx using circular_buf_put()
+     ↓
+If UART is idle, first character is retrieved from cbufTx to latestTx
+     ↓
+usart_write_buffer_job() is called to send latestTx
+     ↓
+Transmission complete interrupt triggers
+     ↓
+usart_write_callback() is called
+     ↓
+Next character is retrieved from cbufTx to latestTx
+     ↓
+usart_write_buffer_job() is called again
+     ↓
+Process repeats until cbufTx is empty
+     ↓
+Characters appear on PC terminal
+```
+
+## 9. StartTasks() Function
+The `StartTasks()` function:
+- Prints the available heap size before starting tasks
+- Creates the CLI task using `xTaskCreate(vCommandConsoleTask, "CLI_TASK", CLI_TASK_SIZE, NULL, CLI_PRIORITY, &cliTaskHandle)`
+- Prints the available heap size after starting the CLI task
+
+Only one thread is started: the Command Line Interface (CLI) task named "CLI_TASK".
 ## 3. Debug Logger Module
 
 ## 4. Wiretap the convo
