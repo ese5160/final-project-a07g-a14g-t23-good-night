@@ -57,11 +57,12 @@ Primary users of this project include:
 * SRS 05 - The Electronic Pet shall move forward, move backward, turn left and turn right based on users' voice command or mobile application control.
 * SRS 06 - The Electronic Pet shall remind users to take breaks and play a light show when 30 minutes counting down ends.
 * SRS 08 - The OLED shall become black when there is no command received after 5 minutes.
-* SRS 09 - The Electronic Pet shall recognize and answer users' voice commands in 3 seconds after recieving voice commands.
+* SRS 09 - The Electronic Pet shall recognize and answer users' voice commands in 3 seconds after recieving voice activation commands.
 * SRS 10 - The OLED display shall communicate with MCU via SPI bus(≥10MHz) and display refresh rate ≥30fps.
 * SRS 11 - The microphone shall send signals to AI module via I2S bus(Audio sampling rate ≥44.1kHz).
 * The speaker shall communicate with AI module via PWM/DAC signals.
 
+![Block Diagram](A07G_Images/A07G_Project_Architecture.png)
 ## 2. Understanding the Starter Code
 
 ## 3. Debug Logger Module
