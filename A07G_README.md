@@ -7,6 +7,7 @@
 * Description of test hardware: Laptop, ROG M16, windows11
 
 ## 0. Install Percepio
+![Images1](A07G_Images/A07G_0.png)
 
 ## 1. Software Architecture
 
