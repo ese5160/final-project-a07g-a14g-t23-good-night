@@ -36,6 +36,8 @@ static const CLI_Command_Definition_t xResetCommand =
         (const pdCOMMAND_LINE_CALLBACK)CLI_ResetDevice,
         0};
 
+SemaphoreHandle_t xRXSemaphore; // Semaphore for CLI
+
 /******************************************************************************
  * Forward Declarations
  ******************************************************************************/
@@ -65,7 +67,12 @@ void vCommandConsoleTask(void *pvParameters)
     static uint8_t pcEscapeCodePos = 0;
 
     // Any semaphores/mutexes/etc you needed to be initialized, you can do them here
-
+	xRXSemaphore = xSemaphoreCreateBinary();
+	if (xRXSemaphore == NULL)
+	{
+		SerialConsoleWriteString("Failed to create xRxSemaphore!\r\n");
+	}
+	
     /* This code assumes the peripheral being used as the console has already
     been opened and configured, and is passed into the task as the task
     parameter.  Cast the task parameter to the correct type. */
@@ -217,7 +224,18 @@ void vCommandConsoleTask(void *pvParameters)
 static void FreeRTOS_read(char *character)
 {
     // ToDo: Complete this function
-    vTaskSuspend(NULL); // We suspend ourselves. Please remove this when doing your code
+	uint8_t rxChar;
+	
+	//Wait for Signal and stop to block the thread when receiving data.
+	if (xSemaphoreTake(xRXSemaphore,portMAX_DELAY) == pdTRUE)
+	{
+		//Read Character
+		if (SerialConsoleReadCharacter(&rxChar) != -1)
+		{
+			*character = rxChar;
+		}
+	}
+//    vTaskSuspend(NULL); // We suspend ourselves. Please remove this when doing your code
 }
 
 /******************************************************************************

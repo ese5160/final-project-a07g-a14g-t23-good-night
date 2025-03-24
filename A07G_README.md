@@ -213,8 +213,11 @@ Only one thread is started: the Command Line Interface (CLI) task named "CLI_TAS
 </div>
 
 [Click here for the captured file of a wiretapped conversation](A07G_Part4_Analyzer_Capture.sal)
+
 ## 5. Complete the CLI
 
+[Click here to see FreeRTOS_read(char *character)]()
 
+[Click here to see usart_read_callback(struct usart_module *const usart_module)](https://github.com/ese5160/final-project-a07g-a14g-t23-good-night/blob/main/CLI%20Starter%20Code/src/SerialConsole/SerialConsole.c#L235)
 
 ## 6. Add CLI commands

@@ -27,7 +27,7 @@
  * Includes
  ******************************************************************************/
 #include "SerialConsole.h"
-
+#include "semphr.h"
 /******************************************************************************
  * Defines
  ******************************************************************************/
@@ -62,6 +62,8 @@ struct usart_module usart_instance;
 char rxCharacterBuffer[RX_BUFFER_SIZE]; 			   ///< Buffer to store received characters
 char txCharacterBuffer[TX_BUFFER_SIZE]; 			   ///< Buffer to store characters to be sent
 enum eDebugLogLevels currentDebugLevel = LOG_INFO_LVL; ///< Default debug level
+
+extern SemaphoreHandle_t xRxSemaphore; //This Variable is in the CliThread.c, but we need to use it
 
 /******************************************************************************
  * Global Functions
@@ -235,6 +237,19 @@ static void configure_usart_callbacks(void)
 void usart_read_callback(struct usart_module *const usart_module)
 {
 	// ToDo: Complete this function 
+	// Store the latest received character into the RX buffer.
+	circular_buf_put(cbufRx, (uint8_t)latestRx);
+	
+	// Notify CLI that there is a character.
+	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+	xSemaphoreGiveFromISR(xRxSemaphore, &xHigherPriorityTaskWoken);
+	
+	// Open the next time receiving.
+	usart_read_buffer_job(&usart_instance, (uint8_t *)&latestRx, 1); 
+	
+	// If there is a higher priority task, switch the task.
+	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+	
 }
 
 /**************************************************************************/ 
