@@ -153,6 +153,20 @@ void LogMessage(enum eDebugLogLevels level, const char *format, ...)
 {
     // Todo: Implement Debug Logger
 	// More detailed descriptions are in header file
+	
+	// Only print if the level is >= current debug level
+	if (level >= currentDebugLevel) {
+		char buffer[128]; // Buffer to hold the formatted message
+		va_list args;
+		
+		// Format the message with variable arguments
+		va_start(args, format);
+		vsprintf(buffer, format, args);
+		va_end(args);
+		
+		// Send the formatted message to the serial console
+		SerialConsoleWriteString(buffer);
+	}
 }
 
 /*
