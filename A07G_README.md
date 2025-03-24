@@ -216,8 +216,12 @@ Only one thread is started: the Command Line Interface (CLI) task named "CLI_TAS
 
 ## 5. Complete the CLI
 
-[Click here to see FreeRTOS_read(char *character)]()
+[Click here to see FreeRTOS_read(char *character)](https://github.com/ese5160/final-project-a07g-a14g-t23-good-night/blob/main/CLI%20Starter%20Code/src/CliThread/CliThread.c#L224)
 
 [Click here to see usart_read_callback(struct usart_module *const usart_module)](https://github.com/ese5160/final-project-a07g-a14g-t23-good-night/blob/main/CLI%20Starter%20Code/src/SerialConsole/SerialConsole.c#L235)
+
+The screenshot of these two function is shown below:
+![FreeRTOS_read](A07G_Images/RTOS_read().png)
+![usart_read_callback](A07G_Images/usart_read_callback().png)
 
 ## 6. Add CLI commands
