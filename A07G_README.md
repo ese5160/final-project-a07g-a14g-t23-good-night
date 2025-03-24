@@ -157,7 +157,7 @@ New read operation is started with usart_read_buffer_job()
 Application retrieves character from cbufRx using SerialConsoleReadCharacter()
 ```
 
-## 8. UART Transmission Flow Diagram
+### 8. UART Transmission Flow Diagram
 ```
 Application calls SerialConsoleWriteString("string")
      ↓
@@ -180,7 +180,7 @@ Process repeats until cbufTx is empty
 Characters appear on PC terminal
 ```
 
-## 9. StartTasks() Function
+### 9. StartTasks() Function
 The `StartTasks()` function:
 - Prints the available heap size before starting tasks
 - Creates the CLI task using `xTaskCreate(vCommandConsoleTask, "CLI_TASK", CLI_TASK_SIZE, NULL, CLI_PRIORITY, &cliTaskHandle)`
@@ -192,5 +192,7 @@ Only one thread is started: the Command Line Interface (CLI) task named "CLI_TAS
 ## 4. Wiretap the convo
 
 ## 5. Complete the CLI
+
+
 
 ## 6. Add CLI commands
