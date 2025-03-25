@@ -14,6 +14,7 @@
 /******************************************************************************
  * Defines
  ******************************************************************************/
+#define FIRMWARE_VERSION "0.0.1"
 
 /******************************************************************************
  * Variables
@@ -36,7 +37,21 @@ static const CLI_Command_Definition_t xResetCommand =
         (const pdCOMMAND_LINE_CALLBACK)CLI_ResetDevice,
         0};
 
-SemaphoreHandle_t xRXSemaphore; // Semaphore for CLI
+static const CLI_Command_Definition_t xVersionCommand =
+	{
+		"version",
+		"version: Shows the firmware version\r\n",
+		CLI_ShowVersion,
+		0};
+
+static const CLI_Command_Definition_t xTicksCommand =
+	{
+		"ticks",
+		"ticks: Shows FreeRTOS ticks since startup\r\n",
+		CLI_ShowTicks,
+		0};
+
+SemaphoreHandle_t xRxSemaphore; // Semaphore for CLI
 
 /******************************************************************************
  * Forward Declarations
@@ -56,6 +71,8 @@ void vCommandConsoleTask(void *pvParameters)
 
     FreeRTOS_CLIRegisterCommand(&xClearScreen);
     FreeRTOS_CLIRegisterCommand(&xResetCommand);
+	FreeRTOS_CLIRegisterCommand(&xVersionCommand);
+	FreeRTOS_CLIRegisterCommand(&xTicksCommand);
 
     uint8_t cRxedChar[2], cInputIndex = 0;
     BaseType_t xMoreDataToFollow;
@@ -67,8 +84,8 @@ void vCommandConsoleTask(void *pvParameters)
     static uint8_t pcEscapeCodePos = 0;
 
     // Any semaphores/mutexes/etc you needed to be initialized, you can do them here
-	xRXSemaphore = xSemaphoreCreateBinary();
-	if (xRXSemaphore == NULL)
+	xRxSemaphore = xSemaphoreCreateBinary();
+	if (xRxSemaphore == NULL)
 	{
 		SerialConsoleWriteString("Failed to create xRxSemaphore!\r\n");
 	}
@@ -227,7 +244,7 @@ static void FreeRTOS_read(char *character)
 	uint8_t rxChar;
 	
 	//Wait for Signal and stop to block the thread when receiving data.
-	if (xSemaphoreTake(xRXSemaphore,portMAX_DELAY) == pdTRUE)
+	if (xSemaphoreTake(xRxSemaphore,portMAX_DELAY) == pdTRUE)
 	{
 		//Read Character
 		if (SerialConsoleReadCharacter(&rxChar) != -1)
@@ -260,3 +277,17 @@ BaseType_t CLI_ResetDevice(int8_t *pcWriteBuffer, size_t xWriteBufferLen, const 
     system_reset();
     return pdFALSE;
 }
+
+// Print a Firmware Version
+BaseType_t CLI_ShowVersion(int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString)
+{
+	snprintf((char *)pcWriteBuffer, xWriteBufferLen, "Firmware version: %s\r\n", FIRMWARE_VERSION);	
+	return pdFALSE;
+}
+
+// Print the number of ticks
+BaseType_t CLI_ShowTicks(int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString)
+{
+	snprintf((char *)pcWriteBuffer, xWriteBufferLen, "System ticks: %lu\r\n", xTaskGetTickCount());
+	return pdFALSE;
+} 

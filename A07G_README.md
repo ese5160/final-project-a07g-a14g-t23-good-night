@@ -225,3 +225,7 @@ The screenshot of these two function is shown below:
 ![usart_read_callback](A07G_Images/usart_read_callback().png)
 
 ## 6. Add CLI commands
+
+[Click here to see functioning CLI code](https://github.com/ese5160/final-project-a07g-a14g-t23-good-night/blob/main/CLI%20Starter%20Code/src/CliThread/CliThread.c#L224)
+
+[Link to a vedio](https://drive.google.com/file/d/1pcpC2UsV49HzNn-RpS6HlutJnQx80p4S/view?usp=drive_link)

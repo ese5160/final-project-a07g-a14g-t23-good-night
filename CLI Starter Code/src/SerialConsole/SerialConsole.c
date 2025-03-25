@@ -28,6 +28,7 @@
  ******************************************************************************/
 #include "SerialConsole.h"
 #include "semphr.h"
+#include "CliThread.h"
 /******************************************************************************
  * Defines
  ******************************************************************************/
@@ -63,7 +64,7 @@ char rxCharacterBuffer[RX_BUFFER_SIZE]; 			   ///< Buffer to store received char
 char txCharacterBuffer[TX_BUFFER_SIZE]; 			   ///< Buffer to store characters to be sent
 enum eDebugLogLevels currentDebugLevel = LOG_INFO_LVL; ///< Default debug level
 
-extern SemaphoreHandle_t xRxSemaphore; //This Variable is in the CliThread.c, but we need to use it
+//extern SemaphoreHandle_t xRxSemaphore; //This Variable is in the CliThread.c, but we need to use it
 
 /******************************************************************************
  * Global Functions
