@@ -10,21 +10,27 @@
 ![Images1](A07G_Images/A07G_0.png)
 
 ## 1. Software Architecture
-### 1.1 Hardware Requirements Specification (HRS)
-#### 1.1.1 Overview
+### 1.1 HRS & SRS Update
+#### 1.1.1 Hardware Requirements Specification (HRS)
+
+1. Overview:
+
 The Electronic Pet is a kind of desktop product, entertaining users in their daily life. It is controlled by MCU: SAMD21G, able to display real-time clock based on RTC chip, moving around with wheels controlled by mobile app or human voice, etc.
 
-#### 1.1.2 Users
+2. Users:
+
 Primary users of this project include:
 * Technology enthusiasts interested in innovative human-computer interaction
 * Individuals seeking a more engaging and entertaining way to interact with their computers
   
-#### 1.1.3 Definitions, Abbreviations
+3. Definitions, Abbreviations:
+
 * Micro Controller Unit: MCU
 * Organic Light Emitting Diode: OLED
 * Real Time Clock: RTC
 
-#### 1.1.4 Functionality
+4. Functionality:
+
 * HRS 01 - Project shall be based on SAMW25 microcontroller.
 * HRS 02 - A 39x41x3.3mm OLED shall be used as user interface. 
 * HRS 03 - The Electronic Pet shall move around with wheels controlled by PWM signals(≥20kHz frequency).
@@ -36,20 +42,25 @@ Primary users of this project include:
 * HRS 09 - The Elctronic Pet shall have a switch to allow firmware downloaded between MCU and AI voice module.
 * HRS 10 - The Elctronic Pet shall have a reset button to reset MCU.
   
-### 1.2. Software Requirements Specification (SRS)
-#### 1.2.1 Overview
+#### 1.1.2. Software Requirements Specification (SRS)
+
+1. Overview:
+
 The Electronic Pet is a kind of desktop product, entertaining users in their daily life. It can show animations (including music animation, counting down animation, etc.) in the OLED. It has programmable light show and can communicate with users by voice.
 
-#### 1.2.2 Users
+2. Users:
+
 Primary users of this project include:
 * Technology enthusiasts interested in innovative human-computer interaction
 * Individuals seeking a more engaging and entertaining way to interact with their computers
 
-#### 1.3.3 Definitions, Abbreviations
+3. Definitions, Abbreviations:
+
 * Micro Controller Unit: MCU
 * Organic Light Emitting Diode: OLED
 
-#### 1.4.4 Functionality
+4. Functionality:
+
 * SRS 01 - The OLED shall show real time clock with time changing animation under idle mode.
 * SRS 02 - The Electronic Pet shall count down time, set by users' voice command(all voice ommand response time ≤100ms and all voice recognition accuracy ≥95%).
 * SRS 03 - The OLED shall show time counting down changing animation.
@@ -61,12 +72,12 @@ Primary users of this project include:
 * SRS 09 - The microphone shall send signals to AI module via I2S bus(Audio sampling rate ≥44.1kHz).
 * SRS 10 - The speaker shall communicate with AI module via PWM/DAC signals.
 
-### 1.3 Software Architecture Diagram
+### 1.2 Software Architecture Diagram
 <div align="center">
   <img src="A07G_Images/A07G_Project_Architecture.png" alt="Software Architecture Diagram" width="600">
 </div>
 
-### 1.4 Flowchart/State Machine Diagram
+### 1.3 Flowchart/State Machine Diagram
 <div align="center">
   <img src="A07G_Images/A07G_State_Machine.png" alt="State Machine" width="600">
 </div>
